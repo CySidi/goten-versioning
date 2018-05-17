@@ -1,0 +1,15 @@
+{
+  "name": "goten-versioning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node example.js"
+  },
+  "author": "CyS I+D <idi@cys.com.ar>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "goten-versioning": "git+ssh://git@gitlab.cysonline.com.ar:goten/goten-versioning.git"
+  }
+}
