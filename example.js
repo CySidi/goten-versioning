@@ -32,10 +32,10 @@ const version3 = new GotenVersion([
 const routeVersioner = new GotenRouteVersioner([version1, version2, version3])
 
 // creates router and sets versioned routes
-gotenVersionManager.createRoutes(routeVersioner.routeVersions)
+gotenVersionManager.createRoutes(routeVersioner.getVersionedRoutes())
 
 app.use(gotenVersionManager.getRouter())
 
 app.listen(8001, () => {
-  console.log("listo")
+  console.log("Running on 8001")
 })

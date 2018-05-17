@@ -7,6 +7,10 @@ class GotenRouteVersioner {
   constructor(versions){
     this.routeVersions = transformRoutes(versions)
   }
+
+  getVersionedRoutes() {
+    return this.routeVersions
+  }
 }
 
 const transformRoutes = (versions) => {

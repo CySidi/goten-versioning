@@ -5,11 +5,7 @@ Goten Versioning
 
 To install this package, currently we should do it like:
 
-`$ npm install -s git+ssh://git@gitlab.cysonline.com.ar:goten/goten-versioning.git`
-
-P.S. to install in a docker container, you should add your SSH key to /root/.ssh. This can be done by mounting your volume with (being your docker user 'root'):
-
-`~/.ssh/:/root/.ssh/`
+`$ npm install -s goten-versioning`
 
 ## Usage
 
@@ -93,7 +89,7 @@ const version3 = new GotenVersion([
 const routeVersioner = new GotenRouteVersioner([version1, version2, version3])
 
 // creates router and sets versioned routes
-gotenVersionManager.createRoutes(routeVersioner.routeVersions)
+gotenVersionManager.createRoutes(routeVersioner.getVersionedRoutes())
 
 app.use(gotenVersionManager.getRouter())
 
@@ -221,7 +217,7 @@ const GotenRouteVersioner = require('goten-versioning').GotenRouteVersioner
 const routeVersioner = new GotenRouteVersioner([version1, version2, version3])
 ```
 
-After instanciating, we can get the versioned routes by accessing `routeVersioner.routeVersions`. This returns an object where the keys are the name of each version (*v1*, *v2*, etc...) and the values are the associated **GotenVersion**.
+After instanciating, we can get the versioned routes by accessing `routeVersioner.getVersionedRoutes()`. This returns an object where the keys are the name of each version (*v1*, *v2*, etc...) and the values are the associated **GotenVersion**.
 
 ----
 
@@ -229,7 +225,7 @@ After instanciating, we can get the versioned routes by accessing `routeVersione
 
 Exports an object that has functions as attributes. We can call these two functions:
 
- - **createRoutes(routes)**, where routes is the object '**GotenRouteVersioner**.routeVersions' (as seen in [GotenRouteVersioner](#gotenrouteversioner)). It creates endpoints on a express.Router(), based on the routes for each version.
+ - **createRoutes(routes)**, where routes is the object '**GotenRouteVersioner**.getVersionedRoutes()' (as seen in [GotenRouteVersioner](#gotenrouteversioner)). It creates endpoints on a express.Router(), based on the routes for each version.
 
  - **getRouter()**, returns the express.Router().
 
@@ -240,7 +236,7 @@ const app = express()
 const gotenVersionManager = require('goten-versioning').GotenVersionManager
 
 
-gotenVersionManager.createRoutes(routeVersioner.routeVersions)
+gotenVersionManager.createRoutes(routeVersioner.getVersionedRoutes())
 
 app.use(gotenVersionManager.getRouter())
 ```
