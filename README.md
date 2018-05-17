@@ -1,4 +1,31 @@
-# Goten Versioning
+Goten Versioning
+====
+
+## Installation
+
+To install this package, currently we should do it like:
+
+`$ npm install -s git+ssh://git@gitlab.cysonline.com.ar:goten/goten-versioning.git`
+
+P.S. to install in a docker container, you should add your SSH key to /root/.ssh. This can be done by mounting your volume with (being your docker user 'root'):
+
+`~/.ssh/:/root/.ssh/`
+
+## Usage
+
+To use it,
+
+`const GotenVersioning = require('goten-versioning')`
+
+And then you can access the **GotenVersioning** classes and functions. Here's a list of defined ones:
+
+  - [GotenMethods](#gotenmethods)
+  - [GotenRoute](#gotenroute)
+  - [GotenRouteVersioner](#gotenrouteversioner)
+  - [GotenVersion](#gotenversion)
+  - [GotenVersionManager](#gotenversionmanager)
+
+## Description
 
 This package aims to help versioning routes for a project with the following structure. Example:
 ```js
@@ -25,7 +52,7 @@ router.get('/v3/test2', controllerV1.getTestV1)
 app.use(router)
 
 app.listen(8001, () => {
-  console.log("listo")
+  console.log("Running on port 8001")
 })
 ```
 
@@ -37,11 +64,11 @@ const app = express()
 const router = express.Router()
 
 // Goten imports
-const GotenRoute = require('./GotenVersioning/GotenRoute')
-const GotenVersion = require('./GotenVersioning/GotenVersion')
-const GotenRouteVersioner = require('./GotenVersioning/GotenRouteVersioner')
-const gotenVersionManager = require('./GotenVersioning/GotenVersionManager')
-const METHOD = require('./GotenVersioning/GotenMethods')
+const GotenRoute = require('goten-versioning').GotenRoute
+const GotenVersion = require('goten-versioning').GotenVersion
+const GotenRouteVersioner = require('goten-versioning').GotenRouteVersioner
+const gotenVersionManager = require('goten-versioning').GotenVersionManager
+const METHOD = require('goten-versioning').GotenMethods
 
 const controllerV1 = require('./routes/api/v1/testController')
 const controllerV2 = require('./routes/api/v2/testController')
@@ -71,32 +98,30 @@ gotenVersionManager.createRoutes(routeVersioner.routeVersions)
 app.use(gotenVersionManager.getRouter())
 
 app.listen(8001, () => {
-  console.log("listo")
+  console.log("Running on port 8001")
 })
 ```
 
 ----
 
-## GotenMethod
+### GotenMethods
 
 Exports an object that defines HTTP methods (supported by express) as strings.
 
-// TODO
 ```js
-const METHOD = require('goten-versioning').GotenMethod
+const METHOD = require('goten-versioning').GotenMethods
 
 console.log(METHOD.GET) // prints 'get'
 ```
 
 ----
 
-## GotenRoute
+### GotenRoute
 
 Exports the class **GotenRoute**. An instance of this class represents a route that has as attributes *method* (one of **GotenMethod**), *path* (a string that represents the relative path, which does **NOT** include the version), *middlewares* (an array of middlewares that express supports, where the last one is the controller to use) and *name*, which is an optional argument where we define the name of the **GotenRoute** (by default, it gets defined as `method + path`).
 
-// TODO
 ```js
-const METHOD = require('goten-versioning').GotenMethod
+const METHOD = require('goten-versioning').GotenMethods
 const GotenRoute = require('goten-versioning').GotenRoute
 
 const controllerV1 = require('./routes/api/v1/testController')
@@ -111,12 +136,12 @@ const routeGetTestWithName = new GotenRoute(METHOD.GET, "/test2", [controllerV2.
 
 ----
 
-## GotenVersion
+### GotenVersion
 
 Exports the class **GotenVersion**. An instance of this class represents a version that has as attributes *routes* (an array of **GotenRoute**) and *ignorePrevious*, which is an optional attribute to define which routes from previous versions should get ignored. It should receive an array of strings, which map to the name of the **GotenRoute** (by default, it gets defined as an empty array '[]').
 
 ```js
-const METHOD = require('goten-versioning').GotenMethod
+const METHOD = require('goten-versioning').GotenMethods
 const GotenRoute = require('goten-versioning').GotenRoute
 const GotenVersion = require('goten-versioning').GotenVersion
 
@@ -186,7 +211,7 @@ version1.deprecate()
 
 ----
 
-## GotenRouteVersioner
+### GotenRouteVersioner
 
 Exports the class **GotenRouteVersioner**. An instance of this class is used to encapsulate versions. We pass *versions* as an array of **GotenVersion**. These will be transformed to generate versioned routes. The order of the array **DOES** matter, being the first element considered the **v1** route, the second, **v2**, and so on.
 
@@ -200,7 +225,7 @@ After instanciating, we can get the versioned routes by accessing `routeVersione
 
 ----
 
-## GotenVersionManager
+### GotenVersionManager
 
 Exports an object that has functions as attributes. We can call these two functions:
 
@@ -208,15 +233,22 @@ Exports an object that has functions as attributes. We can call these two functi
 
  - **getRouter()**, returns the express.Router().
 
-// TODO
 ```js
 const express = require('express')
 const app = express()
 
-const gotenVersionManager = require('goten-versioning').gotenVersionManager
+const gotenVersionManager = require('goten-versioning').GotenVersionManager
 
 
 gotenVersionManager.createRoutes(routeVersioner.routeVersions)
 
 app.use(gotenVersionManager.getRouter())
 ```
+
+## Contribution
+
+To contribute to this package, we propose the following workflow:
+
+- Add an issue with related tags to describe the contribution (is it a bug?, a feature request?)
+- Branch your solution from *develop*, with the name as `#<issue_number>_<descriptive_name>`
+- Pull request and wait for approval/corrections

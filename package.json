@@ -9,6 +9,7 @@
   "author": "CyS I+D <idi@cys.com.ar>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "goten-versioning": "git+ssh://git@gitlab.cysonline.com.ar:goten/goten-versioning.git"
   }
 }
