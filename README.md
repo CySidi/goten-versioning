@@ -5,11 +5,7 @@ Goten Versioning
 
 To install this package, currently we should do it like:
 
-`$ npm install -s git+ssh://git@gitlab.cysonline.com.ar:goten/goten-versioning.git`
-
-P.S. to install in a docker container, you should add your SSH key to /root/.ssh. This can be done by mounting your volume with (being your docker user 'root'):
-
-`~/.ssh/:/root/.ssh/`
+`$ npm install -s git+https://github.com/CySidi/goten-versioning`
 
 ## Usage
 
