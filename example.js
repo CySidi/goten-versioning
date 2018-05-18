@@ -37,5 +37,5 @@ gotenVersionManager.createRoutes(routeVersioner.getVersionedRoutes())
 app.use(gotenVersionManager.getRouter())
 
 app.listen(8001, () => {
-  console.log("listo")
+  console.log("Running on 8001")
 })
