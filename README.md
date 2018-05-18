@@ -5,7 +5,7 @@ Goten Versioning
 
 To install this package, currently we should do it like:
 
-`$ npm install -s git+https://github.com/CySidi/goten-versioning`
+`$ npm install -s goten-versioning`
 
 ## Usage
 
