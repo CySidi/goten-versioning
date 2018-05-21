@@ -3,15 +3,9 @@ Goten Versioning
 
 ## Installation
 
-<<<<<<< HEAD
 To install this package,
 
 $ `npm install -s goten-versioning`
-=======
-To install this package, currently we should do it like:
-
-`$ npm install -s goten-versioning`
->>>>>>> ffdea5e9926ddb1a7085c84e40b70ad6ffafb3dc
 
 ## Usage
 
@@ -104,15 +98,12 @@ app.listen(8001, () => {
 })
 ```
 
-<<<<<<< HEAD
 You can see that when using the package we are adding more lines to the code, but this saves us from having to copy/paste every single line of `app.use`. Imagine if we had 5 different versions, with tons of endpoints each. We would be copy/pasting every single call to `app.use`, which can make our app unmantainable.
 
 With ***goten-versioning***, we aim to make this easier for the developer. You define your routes once, your versions, which by default use previous routes, changing their path from `/v1/*` to `/v2/*`, so you don't need to make the same calls again (you can still ignore previous endpoints you no longer want to give support to, and you can deprecate versions too). When you have your versions, we use **GotenRouteVersioner** to generate (from an array of **GotenVersion**) an object that is understandable to **GotenVersionManager**. We then have a router with *all* our versioned routes (and a default `/` path that is the same as *v1*). When we want a new version, we just add our new or changed routes, and that's it. No more copy/pasting horror.
 
 A good directory structure will help if coming from a non-GotenVersioning project, but if you weren't so lucky you can start separating routes from other logic you might have lying around (including controllers), and after that it should take a little less than an hour to complete the 'migration' on a medium-sized project (we tested this on one of our apps - that has about 20 routes - and it took about 15 minutes or so, with a bunch of copy/pasting). When done, you will be glad when your client asks you to add some functionality or change existing ones (or not, but it will sure be less frustrating) because all you have to do is define what you are getting requested to do and that's it, no repetition.
 
-=======
->>>>>>> ffdea5e9926ddb1a7085c84e40b70ad6ffafb3dc
 ----
 
 ### GotenMethods
